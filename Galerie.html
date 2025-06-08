@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie d'Images Animée</title>
+    <style>
+    /* Réinitialisation des styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* Style du header */
+header {
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInDown 1s ease-out;
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+/* Style de la galerie */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 images par ligne */
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: calc(var(--i) * 0.2s); /* Animation décalée pour chaque image */
+}
+
+.gallery-item:nth-child(1) { --i: 1; }
+.gallery-item:nth-child(2) { --i: 2; }
+.gallery-item:nth-child(3) { --i: 3; }
+.gallery-item:nth-child(4) { --i: 1; }
+.gallery-item:nth-child(5) { --i: 2; }
+.gallery-item:nth-child(6) { --i: 3; }
+/* Ajoutez plus de sélecteurs si vous avez plus d'images */
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+    filter: brightness(70%);
+}
+
+/* Caption animée */
+.caption {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: bottom 0.4s ease;
+}
+
+.gallery-item:hover .caption {
+    bottom: 0;
+}
+
+/* Style du footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: #111;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Media Queries pour la responsivité */
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2 images par ligne */
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    .gallery-item img {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .caption {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr; /* 1 image par ligne */
+        gap: 1rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .gallery-item img {
+        height: 200px;
+    }
+
+    .gallery-item {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+</style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Galerie Dynamique</h1>
+        <p>Découvrez une collection d'images avec style responsive</p>
+    </header>
+    <main>
+        <section class="gallery">
+            <!-- Exemple d'images -->
+            <div class="gallery-item">
+                <img src="images/4.jpeg" alt="Image 1">
+                <div class="caption">Kids</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/32.jpg" alt="Image 2">
+                <div class="caption">Spiderman Miles Morales</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/12.jpeg" alt="Image 3">
+                <div class="caption">Super Cars</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/8.jpeg" alt="Image 4">
+                <div class="caption">Joker</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/7.jpeg" alt="Image 5">
+                <div class="caption">Joker</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/3.jpeg" alt="Image 6">
+                <div class="caption">Night</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/5.jpeg" alt="Image 7">
+                <div class="caption">Airs Pods Pro Max </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/6.jpeg" alt="Image 8">
+                <div class="caption">Ying and Yang</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/10.jpeg" alt="Image 9">
+                <div class="caption">Super Cars</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/11.jpeg" alt="Image 10">
+                <div class="caption">Super Cars</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/12.jpeg" alt="Image 11">
+                <div class="caption">Super Cars</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/13.jpeg" alt="Image 12">
+                <div class="caption">Super Cars</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/14.jpeg" alt="Image 13">
+                <div class="caption">Super Cars</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/15.jpeg" alt="Image 14">
+                <div class="caption">Light</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/1.jpeg" alt="Image 15">
+                <div class="caption">The Wall</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/16.jpeg" alt="Image 16">
+                <div class="caption">Luffy</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/17.jpeg" alt="Image 17">
+                <div class="caption">Poker</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/18.jpeg" alt="Image 18">
+                <div class="caption">Kids</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/19.jpeg" alt="Image 19">
+                <div class="caption">Super Cars</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/20.jpeg" alt="Image 20">
+                <div class="caption">Shadows</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/21.jpeg" alt="Image 21">
+                <div class="caption">Neymar Jr</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/22.jpeg" alt="Image 22">
+                <div class="caption">Lionnel Messi</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/23.jpeg" alt="Image 23">
+                <div class="caption">Cristiano Ronaldo</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/24.jpeg" alt="Image 24">
+                <div class="caption">Masked Man</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/25.jpeg" alt="Image 25">
+                <div class="caption">Flowers</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/26.jpg" alt="Image 26">
+                <div class="caption">Plant</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/27.jpeg" alt="Image 27">
+                <div class="caption">Super Cars</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/28.jpeg" alt="Image 28">
+                <div class="caption">Owl</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/29.jpeg" alt="Image 29">
+                <div class="caption">Super Cars</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/30.jpeg" alt="Image 30">
+                <div class="caption">Super Cars</div>
+            </div>
+            
+            <!-- Ajoutez d'autres gallery-item pour plus d'images -->
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Jordan Nkoue. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

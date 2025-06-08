@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire</title>
+    <script src="https://kit.fontawesome.com/f6c86d60b4.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: url(images/1.jpeg) no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section {
+            background-color: transparent;
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            width: 400px;
+            position: relative;
+        }
+
+        h1, h2, p {
+            text-align: center;
+            color: white;
+        }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px 40px 10px 10px;
+            background: transparent;
+            border-bottom: 3px dashed white;
+            border-radius: 25px;
+            outline: 1px solid black;
+            font-size: 16px;
+            color: white;
+        }
+
+        .input-box i {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: white;
+        }
+
+        .forgot-password, .remember-me, .register {
+            font-size: 14px;
+            color: white;
+        }
+
+        .forgot-password a,
+        .register a {
+            color: #00f;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: transparent;
+            border: 2px dashed blue;
+            color: white;
+        }
+
+        .success-message {
+            display: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .error {
+            color: yellow;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        .register {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="success-message" id="successMessage">✔ Formulaire envoyé avec succès !</div>
+
+        <h1>Inscription</h1>
+        <form id="formulaire" novalidate>
+            <div class="welcome-message">
+                <h2>Bienvenue sur notre site <br> web!</h2>
+                <p>Veuillez remplir le formulaire ci-dessous pour vous inscrire</p>
+            </div>
+            <br>
+
+            <div class="input-box">
+                <input type="text" id="name" name="name" placeholder="Nom" required>
+                <i class="fa-solid fa-user"></i>
+                <div class="error" id="nameError"></div>
+            </div>
+
+            <div class="input-box">
+                <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+                <i class="fa-solid fa-user"></i>
+                <div class="error" id="prenomError"></div>
+            </div>
+
+            <div class="input-box">
+                <input type="date" id="dateNaissance" name="dateNaissance" required>
+                <i class="fa-solid fa-calendar-days"></i>
+                <div class="error" id="dateError"></div>
+            </div>
+
+            <div class="input-box">
+                <input type="email" id="email" name="email" placeholder="Adresse email" required>
+                <i class="fa-solid fa-envelope"></i>
+                <div class="error" id="emailError"></div>
+            </div>
+
+            <div class="input-box">
+                <input type="tel" id="telephone" name="telephone" placeholder="Téléphone (6xxxxxxxx)" required>
+                <i class="fa-solid fa-phone"></i>
+                <div class="error" id="telError"></div>
+            </div>
+
+            <div class="input-box">
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+                <i class="fa-solid fa-lock"></i>
+                <div class="error" id="passwordError"></div>
+            </div>
+            <br>
+            <input type="submit" class="button" value="Se connecter">
+
+            <div class="register">
+                <p>Déja un compte ? <a href="Connexion.html">Se connecter</a></p>
+            </div>
+        </form>
+    </section>
+
+    <script>
+        document.getElementById('formulaire').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name');
+            const prenom = document.getElementById('prenom');
+            const date = document.getElementById('dateNaissance');
+            const email = document.getElementById('email');
+            const tel = document.getElementById('telephone');
+            const password = document.getElementById('password');
+
+            let valid = true;
+
+            // Réinitialiser les messages d'erreur
+            document.querySelectorAll('.error').forEach(el => el.textContent = "");
+
+            // Nom / Prénom
+            if (name.value.trim() === "") {
+                document.getElementById('nameError').textContent = "Nom requis.";
+                valid = false;
+            }
+            if (prenom.value.trim() === "") {
+                document.getElementById('prenomError').textContent = "Prénom requis.";
+                valid = false;
+            }
+
+            // Date de naissance
+            if (!date.value) {
+                document.getElementById('dateError').textContent = "Date requise.";
+                valid = false;
+            }
+
+            // Email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                document.getElementById('emailError').textContent = "Email invalide.";
+                valid = false;
+            }
+
+            // Téléphone FR (commence par 06 ou 07 + 8 chiffres)
+            const telRegex = /^6[25789]\d{7}$/; // Valide les numéros commençant par 6 et appartenant aux opérateurs MTN, Orange, Nexttel, Camtel
+if (!telRegex.test(tel.value)) {
+    document.getElementById('telError').textContent = "Numéro de téléphone invalide (Cameroun).";
+    valid = false;
+}
+
+            // Mot de passe (min. 8 caractères, 1 maj, 1 min, 1 chiffre)
+            const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+            if (!passRegex.test(password.value)) {
+                document.getElementById('passwordError').textContent = "Mot de passe trop faible.";
+                valid = false;
+            }
+
+            // Si tout est bon
+            if (valid) {
+                document.getElementById("successMessage").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("successMessage").style.display = "none";
+                    document.getElementById('formulaire').reset();
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte du Monde avec Leaflet.js</title>
+
+    <!-- Feuilles de style Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .map-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <!-- Script Leaflet.js -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <h1>Carte du Monde Interactive</h1>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+
+    <script>
+        // Initialisation de la carte centrée sur le monde
+        var map = L.map('map').setView([20, 0], 3); // Zoom ajusté pour meilleure stabilité
+
+        // Ajout de la couche de carte OpenStreetMap (serveur optimisé pour la fluidité)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Correction du redimensionnement de la carte pour éviter les bugs
+        window.addEventListener('resize', () => {
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 200);
+        });
+    </script>
+
+</body>
+</html>
